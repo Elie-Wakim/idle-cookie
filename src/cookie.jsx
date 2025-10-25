@@ -23,8 +23,9 @@ function Cookie(){
     const [cost_upgrade,newCost_Upgrade] = useState(35)
     const [amount,newAmount] = useState(1)
     const [cost_auto,newCost_Auto] = useState(100);
-    const [auto,newAuto] = useState(false)
-    const [auto_count,newAuto_Count] = useState(1)
+    const [auto,newAuto] = useState(false);
+    const [auto_count,newAuto_Count] = useState(1);
+    
     function handleclick(){
         newCount(count+amount);
     }
@@ -71,6 +72,36 @@ useEffect(() => {
         return () => clearInterval(interval);
     }
 }, [auto,auto_count]);
+useEffect(() => {
+  // Load saved data when component mounts
+  const savedCount = localStorage.getItem("count");
+  const savedLvl = localStorage.getItem("lvl");
+  const savedAutoLvl = localStorage.getItem("auto_lvl");
+  const savedAuto = localStorage.getItem("auto");
+  const savedCostUpgrade = localStorage.getItem("cost_upgrade")
+  const savedCostAuto = localStorage.getItem("cost_auto")
+  const savedAmount = localStorage.getItem("amount")
+
+  if (savedCount) newCount(parseInt(savedCount));
+  if (savedLvl) newLvl(parseInt(savedLvl));
+  if (savedAutoLvl) newAuto_Lvl(parseInt(savedAutoLvl));
+  if (savedAuto) newAuto(savedAuto === "true");
+  if (savedCostUpgrade) newCost_Upgrade(parseInt(savedCostUpgrade));
+  if(savedCostAuto) newCost_Auto(parseInt(savedCostAuto));
+  if(savedAmount) newAmount(parseInt(savedAmount));
+}, []);
+useEffect(() => {
+  const interval = setInterval(() => {
+    localStorage.setItem("count", count);
+    localStorage.setItem("lvl", lvl);
+    localStorage.setItem("auto_lvl", auto_lvl);
+    localStorage.setItem("auto", auto);
+    localStorage.setItem("cost_upgrade",cost_upgrade);
+    localStorage.setItem("cost_auto",cost_auto)
+    localStorage.setItem("amount",amount)
+  }, 2000);
+  return () => clearInterval(interval);
+}, [count, lvl, auto_lvl, auto,cost_upgrade,cost_auto,amount]);
  const audioRef = useRef(null);
 
   const playMusic = () => {
@@ -85,9 +116,16 @@ useEffect(() => {
      document.querySelector('.music-pause').style.boxShadow = 'none';
     document.querySelector('.music-play').style.boxShadow= '2px 5px 1px rgba(0, 0, 0, 0.3)';
   };
-
+  const reset = ()=>{
+    const confirm = window.confirm("Are you sure you want to reset?")
+    if (confirm) {
+  localStorage.clear();
+  window.location.reload();
+}
+  }
         return(
         <div className='container' style={{backgroundImage: `url(${bgcook})`}}>
+            <button className='btn' onClick={reset}>Reset Data</button>
         <h1>Current level {lvl}</h1>
         <h2>Number of cookies: {count}</h2>
         <h3>Name: {cookie[lvl-1].name}</h3> 
