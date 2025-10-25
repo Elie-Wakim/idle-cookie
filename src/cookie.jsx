@@ -15,7 +15,6 @@ const cookie = [
   {pic: cookie4,name: "lovely"}
 ];
 
-
 function Cookie(){
     const [count,newCount] = useState(0)
     const [lvl,newLvl] = useState(1)
@@ -25,7 +24,7 @@ function Cookie(){
     const [cost_auto,newCost_Auto] = useState(100);
     const [auto,newAuto] = useState(false);
     const [auto_count,newAuto_Count] = useState(1);
-    
+    const isresetting = useRef(false);
     function handleclick(){
         newCount(count+amount);
     }
@@ -92,6 +91,7 @@ useEffect(() => {
 }, []);
 useEffect(() => {
   const interval = setInterval(() => {
+    if(!isresetting.current){
     localStorage.setItem("count", count);
     localStorage.setItem("lvl", lvl);
     localStorage.setItem("auto_lvl", auto_lvl);
@@ -99,7 +99,7 @@ useEffect(() => {
     localStorage.setItem("cost_upgrade",cost_upgrade);
     localStorage.setItem("cost_auto",cost_auto)
     localStorage.setItem("amount",amount)
-  }, 2000);
+  }}, 1000);
   return () => clearInterval(interval);
 }, [count, lvl, auto_lvl, auto,cost_upgrade,cost_auto,amount]);
  const audioRef = useRef(null);
@@ -119,6 +119,7 @@ useEffect(() => {
   const reset = ()=>{
     const confirm = window.confirm("Are you sure you want to reset?")
     if (confirm) {
+        isresetting.current=true;
   localStorage.clear();
   window.location.reload();
 }
