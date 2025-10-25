@@ -80,6 +80,7 @@ useEffect(() => {
   const savedCostUpgrade = localStorage.getItem("cost_upgrade")
   const savedCostAuto = localStorage.getItem("cost_auto")
   const savedAmount = localStorage.getItem("amount")
+  const savedAutoCount = localStorage.getItem("auto_count")
 
   if (savedCount) newCount(parseInt(savedCount));
   if (savedLvl) newLvl(parseInt(savedLvl));
@@ -88,6 +89,7 @@ useEffect(() => {
   if (savedCostUpgrade) newCost_Upgrade(parseInt(savedCostUpgrade));
   if(savedCostAuto) newCost_Auto(parseInt(savedCostAuto));
   if(savedAmount) newAmount(parseInt(savedAmount));
+  if(savedAutoCount) newAuto_Count(parseInt(savedAutoCount));
 }, []);
 useEffect(() => {
   const interval = setInterval(() => {
@@ -99,9 +101,10 @@ useEffect(() => {
     localStorage.setItem("cost_upgrade",cost_upgrade);
     localStorage.setItem("cost_auto",cost_auto)
     localStorage.setItem("amount",amount)
+    localStorage.setItem("auto_count",auto_count)
   }}, 1000);
   return () => clearInterval(interval);
-}, [count, lvl, auto_lvl, auto,cost_upgrade,cost_auto,amount]);
+}, [count, lvl, auto_lvl, auto,cost_upgrade,cost_auto,amount,auto_count]);
  const audioRef = useRef(null);
 
   const playMusic = () => {
