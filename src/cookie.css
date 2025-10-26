@@ -19,8 +19,7 @@ body{
     font-size:140%;
 }
 img{
-    width: 30%;
-    height: 10%;
+    width: 35%;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -66,11 +65,9 @@ cursor:pointer;
   background-repeat: no-repeat;
   border: 1px solid black ;
     }
-    .img{
-    width: 35%;
-    height: 20%;
+    img{
     border-radius: 50%;
-    object-fit: cover;
+    width: 50%
     }
 button{
     margin-left:1%;
