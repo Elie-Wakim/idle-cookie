@@ -24,7 +24,7 @@ const cookie = [
 ];
 const music=[music1,music2,music3,music4,music5]
 function Cookie(){
-    const [count,newCount] = useState(0)
+    const [count,newCount] = useState(100000)
     const [lvl,newLvl] = useState(1)
     const [auto_lvl,newAuto_Lvl]=useState(1)
     const [cost_upgrade,newCost_Upgrade] = useState(35)
@@ -51,7 +51,7 @@ function Cookie(){
         newLvl(lvl+1);
         newCount(count-cost_upgrade);
         newAmount(amount+1);
-        newCost_Upgrade(cost_upgrade*4);
+        newCost_Upgrade(Math.ceil(cost_upgrade*2.5));
     }else
         alert("Level Max Reached")
 }
