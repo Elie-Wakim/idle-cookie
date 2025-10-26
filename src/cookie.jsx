@@ -2,19 +2,25 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import React, { useRef } from 'react';
 import './cookie.css'
-const mus = require("./music/leva-eternity.mp3") 
+const music1 = require("./music/pancake.mp3") 
+const music2= require("./music/honey jam.mp3")
+const music3 = require("./music/butter.mp3")
+const music4 = require("./music/chocolate.mp3")
+const music5 = require("./music/donut.mp3")
 const bgcook=require("./pics/background.png")
 const cookie1 = require('./pics/cookie1.png')
 const cookie2 = require('./pics/cookie2.png')
 const cookie3=require('./pics/cookie3.png')
 const cookie4 = require('./pics/cookie4.png')
+const cookie5 = require('./pics/cookie5.png')
 const cookie = [
   { pic: cookie1, name: "Crumbled Cookie" },
   { pic: cookie2, name: "Cutey" },
   {pic: cookie3,name: "Alt-Ctrl-Cookie"},
-  {pic: cookie4,name: "lovely"}
+  {pic: cookie4,name: "Lovely"},
+  {pic: cookie5,name: "Luna"}
 ];
-
+const music=[music1,music2,music3,music4,music5]
 function Cookie(){
     const [count,newCount] = useState(0)
     const [lvl,newLvl] = useState(1)
@@ -24,6 +30,8 @@ function Cookie(){
     const [cost_auto,newCost_Auto] = useState(100);
     const [auto,newAuto] = useState(false);
     const [auto_count,newAuto_Count] = useState(1);
+    const [click,setClick] = useState(false);
+    const [musindex,setMusindex] =useState(0)
     const isresetting = useRef(false);
     function handleclick(){
         newCount(count+amount);
@@ -72,7 +80,7 @@ useEffect(() => {
     }
 }, [auto,auto_count]);
 useEffect(() => {
-  // Load saved data when component mounts
+
   const savedCount = localStorage.getItem("count");
   const savedLvl = localStorage.getItem("lvl");
   const savedAutoLvl = localStorage.getItem("auto_lvl");
@@ -108,7 +116,12 @@ useEffect(() => {
  const audioRef = useRef(null);
 
   const playMusic = () => {
+  if (!click) {
+    setClick(true);
     audioRef.current.play();
+  } else {
+    setMusindex((prev) => (prev + 1) % music.length);
+  }
     document.querySelector('.music-play').style.boxShadow = 'none';
     document.querySelector('.music-pause').style.boxShadow= '2px 5px 1px rgba(0, 0, 0, 0.3)';
 
@@ -118,7 +131,16 @@ useEffect(() => {
     audioRef.current.pause();
      document.querySelector('.music-pause').style.boxShadow = 'none';
     document.querySelector('.music-play').style.boxShadow= '2px 5px 1px rgba(0, 0, 0, 0.3)';
+    setClick(false);
   };
+  useEffect(() => {
+  if (audioRef.current) {
+    audioRef.current.load();
+    if (click) {
+      audioRef.current.play();
+    }
+  }
+}, [musindex,click]);
   const reset = ()=>{
     const confirm = window.confirm("Are you sure you want to reset?")
     if (confirm) {
@@ -130,15 +152,16 @@ useEffect(() => {
         return(
         <div className='container' style={{backgroundImage: `url(${bgcook})`}}>
             <button className='btn' onClick={reset}>Reset Data</button>
-        <h1>Current level {lvl}</h1>
-        <h2>Number of cookies: {count}</h2>
-        <h3>Name: {cookie[lvl-1].name}</h3> 
+        <h1 id='txt'>Current level {lvl}</h1>
+        <h2 id='txt'>Number of cookies: {count}</h2>
+        <h3 id='txt' className='name'>{cookie[lvl-1].name}</h3> 
         <img src={cookie[lvl-1].pic} className="cookie" alt="img" onClick={handleclick} /><br />
         <button className='btn' onClick={lvl<cookie.length?()=>purchase_lvl():()=>""}>{lvl<cookie.length?"Upgrade for level ("+(lvl+1) + ") " + cost_upgrade +" cookies":"level max reached"}</button> 
         <button className='btn' onClick={!auto? ()=>purchase_auto(auto):auto_lvl<10 ? ()=> upgrade_auto():()=>""}>{auto_lvl===10?"Max level reached":auto? 'Upgrade auto clicker to lvl ('+(auto_lvl+1)+") for "+ cost_auto +" Cookies":'Get Auto Clicker ' +cost_auto+ ' cookies'} </button>
-        <audio ref={audioRef} src={mus} />
-              <button className='music-play' onClick={playMusic}>Play Music</button>
-              <button className='music-pause'onClick={pauseMusic}>Pause Music</button>
+        <audio ref={audioRef} src={music[musindex]} />
+              <button className='music-play' onClick={playMusic}>{!click ? "Play Music":"Next song"}</button>
+              <button className='music-pause'onClick={pauseMusic}>Pause Music</button> <br />
+              <b className='msg'>Come Back every week for new features!!</b>
         </div>
     );
 }   

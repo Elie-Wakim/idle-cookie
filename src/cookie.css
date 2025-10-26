@@ -15,12 +15,26 @@ body{
   background-repeat: no-repeat;
   border: 1px solid black ;
 }
-
+.name{
+    font-size:140%;
+}
 img{
     width: 30%;
     height: 10%;
     border-radius: 50%;
     object-fit: cover;
+}
+.container:hover{
+    cursor:url("./pics/cookie_cursor.png"), auto;
+}
+.msg{
+    font-style: oblique;
+    font-size: large;
+    display: block;
+    margin-top: 30px;
+}
+h1, h2, h3 {
+  margin: 5px 0px; /* reduce vertical space between headings */
 }
 button{
     margin-left:1%;
@@ -39,6 +53,7 @@ cursor:pointer;
 }
 .music-play{
     box-shadow: 3px 5px 1px rgba(0, 0, 0, 0.3);
+    margin-right: 20px;
 }
 @media (max-width: 600px) {
     .container{
@@ -57,4 +72,13 @@ cursor:pointer;
     border-radius: 50%;
     object-fit: cover;
     }
+button{
+    margin-left:1%;
+    margin-top: 4%;
+    border-radius: 20px;
+    background-color: rgb(245, 245, 107);
+    border: hidden;
+    font-weight: bolder;
+    font-size:medium;
+}
 }
