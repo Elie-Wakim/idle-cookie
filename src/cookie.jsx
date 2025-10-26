@@ -24,7 +24,7 @@ const cookie = [
 ];
 const music=[music1,music2,music3,music4,music5]
 function Cookie(){
-    const [count,newCount] = useState(100000)
+    const [count,newCount] = useState(0)
     const [lvl,newLvl] = useState(1)
     const [auto_lvl,newAuto_Lvl]=useState(1)
     const [cost_upgrade,newCost_Upgrade] = useState(35)
@@ -158,7 +158,7 @@ useEffect(() => {
         <h2 id='txt'>Number of cookies: {count}</h2>
         <h3 id='txt' className='name'>{cookie[lvl-1].name}</h3> 
         <img src={cookie[lvl-1].pic} className="cookie" alt="img" onClick={handleclick} /><br />
-        <button className='btn' onClick={lvl<cookie.length?()=>purchase_lvl():()=>""}>{lvl<cookie.length?"Upgrade for level ("+(lvl+1) + ") " + cost_upgrade +" cookies":"level max reached"}</button> 
+        <button className='btn' onClick={lvl<cookie.length?()=>purchase_lvl():()=>""}>{lvl<cookie.length?"Upgrade for level ("+(lvl+1) + ") " + cost_upgrade +" cookies":"Max level reached"}</button> 
         <button className='btn' onClick={!auto? ()=>purchase_auto(auto):auto_lvl<10 ? ()=> upgrade_auto():()=>""}>{auto_lvl===10?"Max level reached":auto? 'Upgrade auto clicker to lvl ('+(auto_lvl+1)+") for "+ cost_auto +" Cookies":'Get Auto Clicker ' +cost_auto+ ' cookies'} </button> <br />
         <audio ref={audioRef} src={music[musindex]} />
               <button className='music-play' onClick={playMusic}>{!click ? "Play Music":"Next song"}</button>
