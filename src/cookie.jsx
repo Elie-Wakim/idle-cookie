@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import React, { useRef } from 'react';
 import './cookie.css'
-const music1 = require("./music/pancake.mp3") 
+const music1 = require("./music/butter.mp3") 
 const music2= require("./music/honey jam.mp3")
-const music3 = require("./music/butter.mp3")
-const music4 = require("./music/chocolate.mp3")
-const music5 = require("./music/donut.mp3")
+//const music3 = require("./music/pancake.mp3")
+//const music4 = require("./music/chocolate.mp3")
+//const music5 = require("./music/donut.mp3")
 const bgcook=require("./pics/background.png")
 const cookie1 = require('./pics/cookie1.png')
 const cookie2 = require('./pics/cookie2.png')
@@ -20,7 +20,7 @@ const cookie = [
   {pic: cookie4,name: "Lovely"},
   {pic: cookie5,name: "Luna"}
 ];
-const music=[music1,music2,music3,music4,music5]
+const music=[music1,music2]
 function Cookie(){
     const [count,newCount] = useState(0)
     const [lvl,newLvl] = useState(1)
