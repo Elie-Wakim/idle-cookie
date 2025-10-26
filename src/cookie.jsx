@@ -13,12 +13,14 @@ const cookie2 = require('./pics/cookie2.png')
 const cookie3=require('./pics/cookie3.png')
 const cookie4 = require('./pics/cookie4.png')
 const cookie5 = require('./pics/cookie5.png')
+const cookie6= require('./pics/cookie6.png')
 const cookie = [
   { pic: cookie1, name: "Crumbled Cookie" },
   { pic: cookie2, name: "Cutey" },
   {pic: cookie3,name: "Alt-Ctrl-Cookie"},
   {pic: cookie4,name: "Lovely"},
-  {pic: cookie5,name: "Luna"}
+  {pic: cookie5,name: "Luna"},
+  {pic: cookie6, name:"Staylor"}
 ];
 const music=[music1,music2,music3,music4,music5]
 function Cookie(){
