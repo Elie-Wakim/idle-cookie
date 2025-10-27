@@ -14,13 +14,15 @@ const cookie3=require('./pics/cookie3.png')
 const cookie4 = require('./pics/cookie4.png')
 const cookie5 = require('./pics/cookie5.png')
 const cookie6= require('./pics/cookie6.png')
+const cookie7 = require('./pics/cookie7.png')
 const cookie = [
   { pic: cookie1, name: "Crumbled Cookie" },
   { pic: cookie2, name: "Cutey" },
   {pic: cookie3,name: "Alt-Ctrl-Cookie"},
   {pic: cookie4,name: "Lovely"},
   {pic: cookie5,name: "Luna"},
-  {pic: cookie6, name:"Staylor"}
+  {pic: cookie6, name:"Staylor"},
+  {pic: cookie7, name:"Butter-Cookie"}
 ];
 const music=[music1,music2,music3,music4,music5]
 function Cookie(){
@@ -163,7 +165,7 @@ useEffect(() => {
         <audio ref={audioRef} src={music[musindex]} />
               <button className='music-play' onClick={playMusic}>{!click ? "Play Music":"Next song"}</button>
               <button className='music-pause'onClick={pauseMusic}>Pause Music</button> <br />
-              <b className='msg'>Come Back every week for new features!!</b>
+
         </div>
     );
 }   
