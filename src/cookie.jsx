@@ -79,7 +79,7 @@ useEffect(() => {
     if (auto) {
         const interval = setInterval(() => {
             newCount(prev => prev + auto_count);
-        }, 5000);
+        }, 2500);
         return () => clearInterval(interval);
     }
 }, [auto,auto_count]);
